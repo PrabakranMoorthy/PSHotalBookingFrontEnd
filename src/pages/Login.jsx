@@ -17,9 +17,12 @@ const Login = () => {
       const response = await login(formData);
       // Store JWT token in localStorage or context for global state
       localStorage.setItem("token", response.data.token);
-
       // Redirect user to homepage or dashboard after successful login
-      navigate("/");
+      if (response.data.user.role == "admin") {
+        navigate("/admin/dashboard");
+      } else {
+        navigate("/home");
+      }
     } catch (error) {
       setErrorMessage(error.response?.data?.message || "Something went wrong!");
     }

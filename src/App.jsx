@@ -1,12 +1,43 @@
 import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Home from "./pages/Home";
+import AdminDashboard from "./pages/AdminDashboard";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100 flex justify-center items-center">
-      <h1 className="text-3xl font-bold text-blue-600">
-        Welcome to the Hotel Booking System
-      </h1>
-    </div>
+    <Routes>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute allowedRoles={["user", "admin"]}>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route
+        path="/home"
+        element={
+          <ProtectedRoute allowedRoles={["user", "admin"]}>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Protect admin route: Only admins can access */}
+      <Route
+        path="/admin/dashboard"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <AdminDashboard />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
   );
 }
 
