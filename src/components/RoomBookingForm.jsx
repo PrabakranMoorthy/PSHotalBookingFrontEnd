@@ -97,11 +97,11 @@ const RoomBookingForm = ({ hotel, closeModal }) => {
         bookingResponse
       );
 
-      if (paymentResponse.success) {
+      if (paymentResponse.data.success) {
         setIsBookingSuccessful(true);
         alert("Booking successful!");
         // Redirect to confirmation page
-        navigate(`/confirmation/${bookingResponse._id}`); // Redirect after successful booking
+        navigate(`/home`); // Redirect after successful booking
       } else {
         setErrorMessage("Payment failed!");
       }
