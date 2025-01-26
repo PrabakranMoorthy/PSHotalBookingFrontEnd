@@ -7,12 +7,12 @@ import {
 } from "../services/apiService"; // Import necessary functions
 import { useNavigate } from "react-router-dom";
 
-const RoomBookingForm = () => {
+const RoomBookingForm = ({ hotel, closeModal }) => {
   const navigate = useNavigate();
   const [hotels, setHotels] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [bookingData, setBookingData] = useState({
-    hotelId: "",
+    hotelId: hotel._id,
     roomId: "",
     startDate: "",
     endDate: "",
@@ -117,25 +117,27 @@ const RoomBookingForm = () => {
       <h1 className="text-3xl mb-4">Room Booking Form</h1>
       <form onSubmit={handleBookingSubmit} className="booking-form space-y-4">
         {/* Hotel Dropdown */}
-        <div className="form-group">
-          <label htmlFor="hotel" className="block mb-2">
-            Select Hotel
-          </label>
-          <select
-            id="hotel"
-            value={bookingData.hotelId}
-            onChange={handleHotelChange}
-            className="input"
-            required
-          >
-            <option value="">Select a Hotel</option>
-            {hotels.map((hotel) => (
-              <option key={hotel._id} value={hotel._id}>
-                {hotel.name}
-              </option>
-            ))}
-          </select>
-        </div>
+        {!bookingData.hotelId && (
+          <div className="form-group">
+            <label htmlFor="hotel" className="block mb-2">
+              Selected Hotel
+            </label>
+            <select
+              id="hotel"
+              value={bookingData.hotelId}
+              onChange={handleHotelChange}
+              className="input"
+              required
+            >
+              <option value="">Select a Hotel</option>
+              {hotels.map((hotel) => (
+                <option key={hotel._id} value={hotel._id}>
+                  {hotel.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
         {/* Date Range Inputs */}
         <div className="form-group">
@@ -185,7 +187,7 @@ const RoomBookingForm = () => {
             <option value="">Select a Room</option>
             {rooms.map((room) => (
               <option key={room._id} value={room._id}>
-                {room.name} - ${room.price}
+                {room.name} - Rs.{room.price}
               </option>
             ))}
           </select>
