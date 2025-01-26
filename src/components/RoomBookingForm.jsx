@@ -23,6 +23,7 @@ const RoomBookingForm = () => {
   });
   const [isBookingSuccessful, setIsBookingSuccessful] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const [paymentProcessing, setPaymentProcessing] = useState(false);
 
   useEffect(() => {
@@ -90,12 +91,17 @@ const RoomBookingForm = () => {
         bookingId: bookingResponse._id,
       };
 
-      const paymentResponse = await processPayment(paymentData);
+      const paymentResponse = await processPayment(
+        paymentData,
+        setLoading,
+        bookingResponse
+      );
 
       if (paymentResponse.success) {
         setIsBookingSuccessful(true);
         alert("Booking successful!");
-        navigate("/profile"); // Redirect after successful booking
+        // Redirect to confirmation page
+        navigate(`/confirmation/${bookingResponse._id}`); // Redirect after successful booking
       } else {
         setErrorMessage("Payment failed!");
       }

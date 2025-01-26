@@ -29,38 +29,58 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <form
         onSubmit={handleSubmit}
-        className="p-6 max-w-md mx-auto bg-white shadow-md rounded"
+        className=" bg-white shadow-lg rounded-lg p-8 w-full max-w-md"
       >
-        <h1 className="text-2xl font-bold mb-4">Login</h1>
-        {errorMessage && <p className="text-red-500 mb-4">{errorMessage}</p>}
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-          className="w-full p-2 mb-4 border rounded"
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onChange={handleChange}
-          className="w-full p-2 mb-4 border rounded"
-          required
-        />
+        <h2 className="text-3xl font-bold mb-6 text-center text-color-red">
+          Login
+        </h2>
+        {errorMessage && (
+          <p className="text-red-500 text-sm mb-4">{errorMessage}</p>
+        )}
+        <div className="mb-4">
+          <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
+            Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
+            className="w-full p-2  border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
+        <div className="mb-4">
+          <label
+            className="block text-gray-700 font-bold mb-2"
+            htmlFor="password"
+          >
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onChange={handleChange}
+            className="w-full p-2 border border-gray-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
         <button
           type="submit"
-          className="w-full p-2 bg-blue-600 text-white rounded"
+          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           Login
         </button>
         <p className="mt-4 text-center">
           Don't have an account?{" "}
-          <a href="/register" className="text-blue-600">
+          <a
+            href="/register"
+            className="text-blue-600 hover:underline focus:outline-none"
+          >
             Register
           </a>
         </p>

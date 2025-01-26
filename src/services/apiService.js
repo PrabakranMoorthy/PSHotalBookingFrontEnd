@@ -41,13 +41,51 @@ export const bookRoom = async (bookingData) => {
   }
 };
 
-// API call for Stripe or Razorpay payment
-export const processPayment = async (paymentData) => {
+export const processPayment = async (
+  paymentData,
+  setLoading,
+  bookingResponse
+) => {
   try {
-    const response = await axiosInstance.post("/payments", paymentData);
-    return response.data;
+    setLoading(true);
+
+    // Make payment request to backend
+    const paymentResponse = await axiosInstance.post("/payment", {
+      amount: bookingResponse.totalPrice,
+      bookingId: bookingResponse._id,
+    });
+
+    const paymentData = paymentResponse.data;
+
+    // Initialize Razorpay payment
+    const razorpayOptions = {
+      key: paymentData.key_id, // Replace with actual Razorpay key
+      amount: paymentData.amount, // Total price in paise
+      currency: paymentData.currency,
+      order_id: paymentData.id,
+      handler: async function (response) {
+        // Handle successful payment
+        const paymentDetails = {
+          razorpay_payment_id: response.razorpay_payment_id,
+          razorpay_order_id: response.razorpay_order_id,
+          razorpay_signature: response.razorpay_signature,
+        };
+
+        // Send payment details to backend for verification and final booking
+        await axiosInstance.post("/payment/verify", paymentDetails);
+      },
+      prefill: {
+        name: "examble",
+        email: "example@ex.com",
+      },
+    };
+
+    const razorpay = new window.Razorpay(razorpayOptions);
+    razorpay.open();
   } catch (error) {
-    throw error.response ? error.response.data : error.message;
+    console.error("Error during payment process:", error);
+  } finally {
+    setLoading(false);
   }
 };
 
