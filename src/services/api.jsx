@@ -1,2 +1,2 @@
-const host = "http://localhost:5000";
+const host = "https://pshotalbookingbackend.onrender.com";
 export default host;
