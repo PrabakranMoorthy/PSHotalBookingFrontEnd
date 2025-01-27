@@ -113,16 +113,18 @@ const RoomBookingForm = ({ hotel, closeModal }) => {
   };
 
   return (
-    <div className="booking-container p-8">
-      <h1 className="text-3xl mb-4">Room Booking Form</h1>
-      <form onSubmit={handleBookingSubmit} className="booking-form space-y-4">
+    <div className="booking-container p-8  bg-amber-300">
+      <h1 className="text-3xl mb-4 font-bold fond-sans text-teal-900">
+        Room Booking Form
+      </h1>
+      <form onSubmit={handleBookingSubmit} className="booking-form space-y-4 ">
         {/* Hotel Dropdown */}
         {!bookingData.hotelId && (
-          <div className="form-group">
-            <label htmlFor="hotel" className="block mb-2">
+          <div className="form-group bg text-2xl font-bold text-teal-900">
+            <label htmlFor="hotel" className="block mb-2  " type="text">
               Selected Hotel
             </label>
-            <select
+            <input
               id="hotel"
               value={bookingData.hotelId}
               onChange={handleHotelChange}
@@ -135,7 +137,7 @@ const RoomBookingForm = ({ hotel, closeModal }) => {
                   {hotel.name}
                 </option>
               ))}
-            </select>
+            </input>
           </div>
         )}
 
@@ -150,7 +152,7 @@ const RoomBookingForm = ({ hotel, closeModal }) => {
             name="startDate"
             value={bookingData.startDate}
             onChange={handleDateChange}
-            className="input"
+            className="input bg-gray-300"
             required
           />
         </div>
@@ -165,14 +167,17 @@ const RoomBookingForm = ({ hotel, closeModal }) => {
             name="endDate"
             value={bookingData.endDate}
             onChange={handleDateChange}
-            className="input"
+            className="input bg-gray-300"
             required
           />
         </div>
 
         {/* Room Dropdown */}
         <div className="form-group">
-          <label htmlFor="room" className="block mb-2">
+          <label
+            htmlFor="room"
+            className="block mb-2 text-xl font-bold text-teal-900"
+          >
             Select Room available after dates are selected
           </label>
           <select
@@ -184,7 +189,12 @@ const RoomBookingForm = ({ hotel, closeModal }) => {
             className="input"
             required
           >
-            <option value="">Select a Room</option>
+            <option
+              value=""
+              className="text-xl text-blue-600 text-xl font-bold text-teal-900"
+            >
+              Select a Room
+            </option>
             {rooms.map((room) => (
               <option key={room._id} value={room._id}>
                 {room.name} - Rs.{room.price}
@@ -195,7 +205,10 @@ const RoomBookingForm = ({ hotel, closeModal }) => {
 
         {/* Adult and Child Counts */}
         <div className="form-group">
-          <label htmlFor="adultCount" className="block mb-2">
+          <label
+            htmlFor="adultCount"
+            className="block mb-2 text-xl font-bold text-teal-900 "
+          >
             Adults
           </label>
           <input
@@ -205,14 +218,17 @@ const RoomBookingForm = ({ hotel, closeModal }) => {
             onChange={(e) =>
               setBookingData({ ...bookingData, adultCount: e.target.value })
             }
-            className="input"
+            className="input bg-gray-300"
             min="1"
             required
           />
         </div>
 
         <div className="form-group">
-          <label htmlFor="childCount" className="block mb-2">
+          <label
+            htmlFor="childCount"
+            className="block mb-2 text-xl font-bold text-teal-900"
+          >
             Children
           </label>
           <input
@@ -222,7 +238,7 @@ const RoomBookingForm = ({ hotel, closeModal }) => {
             onChange={(e) =>
               setBookingData({ ...bookingData, childCount: e.target.value })
             }
-            className="input"
+            className="input bg-gray-300"
             min="0"
           />
         </div>
@@ -230,7 +246,7 @@ const RoomBookingForm = ({ hotel, closeModal }) => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="btn btn-primary"
+          className="btn btn-primary rounded p-3 text-white bg-green-500"
           disabled={paymentProcessing}
         >
           {paymentProcessing ? "Processing Payment..." : "Book Now"}
@@ -240,7 +256,7 @@ const RoomBookingForm = ({ hotel, closeModal }) => {
       {/* Error or Success Message */}
       {errorMessage && <p className="text-red-500 mt-2">{errorMessage}</p>}
       {isBookingSuccessful && (
-        <p className="text-green-500 mt-2">Booking was successful!</p>
+        <p className="text-pink-600 text-3xl font-bold mt-2">Booking was successful!</p>
       )}
     </div>
   );

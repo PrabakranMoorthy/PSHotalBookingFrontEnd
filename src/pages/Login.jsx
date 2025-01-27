@@ -29,12 +29,12 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-pink-500 to-violet-600">
       <form
         onSubmit={handleSubmit}
         className=" bg-white shadow-lg rounded-lg p-8 w-full max-w-md"
       >
-        <h2 className="text-3xl font-bold mb-6 text-center text-color-red">
+        <h2 className="text-3xl font-bold font--serif mb-6 text-center text-color-red text-green-600">
           Login
         </h2>
         {errorMessage && (

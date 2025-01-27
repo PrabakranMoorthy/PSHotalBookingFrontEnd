@@ -27,70 +27,74 @@ const Register = () => {
   };
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="p-6 max-w-md mx-auto bg-white shadow-md rounded"
-    >
-      <h1 className="text-2xl font-bold mb-4">Register</h1>
-      <input
-        type="text"
-        name="name"
-        placeholder="Name"
-        onChange={handleChange}
-        className="w-full p-2 mb-4 border rounded"
-        required
-      />
-      <input
-        type="email"
-        name="email"
-        placeholder="Email"
-        onChange={handleChange}
-        className="w-full p-2 mb-4 border rounded"
-        required
-      />
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        onChange={handleChange}
-        className="w-full p-2 mb-4 border rounded"
-        required
-      />
-
-      {/* Role Selection - Radio Buttons */}
-      <div className="mb-4">
-        <label className="block mb-2">Role</label>
-        <label className="mr-4">
-          <input
-            type="radio"
-            name="role"
-            value="user"
-            checked={formData.role === "user"}
-            onChange={handleChange}
-            className="mr-2"
-          />
-          User
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="role"
-            value="admin"
-            checked={formData.role === "admin"}
-            onChange={handleChange}
-            className="mr-2"
-          />
-          Admin
-        </label>
-      </div>
-
-      <button
-        type="submit"
-        className="w-full p-2 bg-blue-600 text-white rounded"
+    <div className="  text- bg-[#019EE3] min-h-screen flex items-center justify-center">
+      <form
+        onSubmit={handleSubmit}
+        className="p-6 max-w-md mx-auto bg-white shadow-md rounded"
       >
-        Register
-      </button>
-    </form>
+        <h1 className="text-2xl font-bold mb-4  font-serif text-red-600">Register</h1>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          onChange={handleChange}
+          className="w-full p-2 mb-4 border rounded"
+          required
+        />
+
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          onChange={handleChange}
+          className="w-full p-2 mb-4 border rounded"
+          required
+        />
+
+        <input
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={handleChange}
+          className="w-full p-2 mb-4 border rounded"
+          required
+        />
+
+        {/* Role Selection - Radio Buttons */}
+        <div className="mb-4">
+          <label className="block mb-2 text-2xl ">Role</label>
+          <label className="mr-4">
+            <input
+              type="radio"
+              name="role"
+              value="user"
+              checked={formData.role === "user"}
+              onChange={handleChange}
+              className="mr-2 accent-green-600"
+            />
+            User
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="role"
+              value="admin"
+              checked={formData.role === "admin"}
+              onChange={handleChange}
+              className="mr-2  accent-green-600"
+            />
+            Admin
+          </label>
+        </div>
+
+        <button
+          type="submit"
+          className="w-full p-2 bg-blue-600 text-white rounded"
+        >
+          Register
+        </button>
+      </form>
+    </div>
   );
 };
 
