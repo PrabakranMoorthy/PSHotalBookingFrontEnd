@@ -23,7 +23,6 @@ const Login = () => {
       if (response.data.user.role == "admin") {
         navigate("/admin/dashboard");
       } else {
-        window.location.reload();
         navigate("/home");
       }
     } catch (error) {
