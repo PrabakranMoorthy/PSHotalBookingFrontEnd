@@ -4,23 +4,12 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [token, setToken] = useState(localStorage.getItem("token") || ""); 
-  const { setToken } = useContext(AuthContext);
-  const [updateTrigger, setUpdateTrigger] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
-
-  useEffect(() => {
-    if (token) {
-      localStorage.setItem("token", token);
-    } else {
-      localStorage.removeItem("token");
-    }
-  }, [token]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,15 +18,8 @@ const Login = () => {
       const jwtToken = response.data.token;
       // Store JWT token in localStorage or context for global state
       localStorage.setItem("token", response.data.token);
-      setToken(jwtToken);
-      setToken(response.data.token); // Updates context
-      setUpdateTrigger((prev) => prev + 1);
       // Redirect user to homepage or dashboard after successful login
-      if (response.data.user.role == "admin") {
-        navigate("/admin/dashboard");
-      } else {
-        navigate("/home");
-      }
+      window.location.href = response.data.user.role === "admin" ? "/admin/dashboard" : "/home";
     } catch (error) {
       setErrorMessage(error.response?.data?.message || "Something went wrong!");
     }
