@@ -16,6 +16,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const response = await login(formData);
+      const jwtToken = response.data.token;
       // Store JWT token in localStorage or context for global state
       localStorage.setItem("token", response.data.token);
       setToken(jwtToken);
