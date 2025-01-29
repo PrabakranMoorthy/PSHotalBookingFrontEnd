@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [token, setToken] = useState(localStorage.getItem("token") || ""); 
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
@@ -17,10 +18,12 @@ const Login = () => {
       const response = await login(formData);
       // Store JWT token in localStorage or context for global state
       localStorage.setItem("token", response.data.token);
+      setToken(jwtToken);
       // Redirect user to homepage or dashboard after successful login
       if (response.data.user.role == "admin") {
         navigate("/admin/dashboard");
       } else {
+        window.location.reload();
         navigate("/home");
       }
     } catch (error) {
